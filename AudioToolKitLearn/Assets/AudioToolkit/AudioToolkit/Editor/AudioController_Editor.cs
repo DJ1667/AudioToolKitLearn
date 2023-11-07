@@ -27,7 +27,6 @@ abstract public class EditorEx : Editor
 
     virtual protected void LogUndo(string label)
     {
-
     }
 
     protected void SetFocusForNextEditableField()
@@ -82,6 +81,7 @@ abstract public class EditorEx : Editor
         {
             GUILayout.Label(" ", styleUnit);
         }
+
         EditorGUILayout.EndHorizontal();
         return f_ret;
     }
@@ -115,7 +115,7 @@ abstract public class EditorEx : Editor
         EditorGUILayout.LabelField(new GUIContent(label, tooltip), labelFieldOption);
         //EditorGUILayout.Space();
         float f_ret = f;
-        f_ret = (float)EditorGUILayout.IntField(Mathf.RoundToInt(f_ret * 100), styleFloat, GUILayout.Width(50)) / 100;
+        f_ret = (float) EditorGUILayout.IntField(Mathf.RoundToInt(f_ret * 100), styleFloat, GUILayout.Width(50)) / 100;
         f_ret = GUILayout.HorizontalSlider(f_ret, 0, 1);
 
         if (!string.IsNullOrEmpty(unit))
@@ -137,7 +137,7 @@ abstract public class EditorEx : Editor
         GUILayout.Label(label, styleLabel);
         //EditorGUILayout.Space();
         float f_ret = f;
-        f_ret = (float)EditorGUILayout.IntField(Mathf.RoundToInt(f_ret * 100), styleFloat, GUILayout.Width(50)) / 100;
+        f_ret = (float) EditorGUILayout.IntField(Mathf.RoundToInt(f_ret * 100), styleFloat, GUILayout.Width(50)) / 100;
         f_ret = GUILayout.HorizontalSlider(f_ret, -1, 1);
         if (!string.IsNullOrEmpty(unit))
         {
@@ -147,6 +147,7 @@ abstract public class EditorEx : Editor
         {
             GUILayout.Label(" ", styleUnit);
         }
+
         EditorGUILayout.EndHorizontal();
         return f_ret;
     }
@@ -223,6 +224,7 @@ abstract public class EditorEx : Editor
             f = new_f;
             return true;
         }
+
         return false;
     }
 
@@ -236,6 +238,7 @@ abstract public class EditorEx : Editor
             f = new_f;
             return true;
         }
+
         return false;
     }
 
@@ -279,7 +282,6 @@ abstract public class EditorEx : Editor
         }
 
         return false;
-
     }
 
     private bool GetBool(bool b, string label, string tooltip = null)
@@ -312,7 +314,7 @@ abstract public class EditorEx : Editor
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField(new GUIContent(label, tooltip), labelFieldOption);
         //GUILayout.Label( label, styleLabel );
-        T new_f = (T)EditorGUILayout.ObjectField(prefab, typeof(T), false);
+        T new_f = (T) EditorGUILayout.ObjectField(prefab, typeof(T), false);
         EditorGUILayout.EndHorizontal();
 
         if (new_f != prefab)
@@ -321,6 +323,7 @@ abstract public class EditorEx : Editor
             prefab = new_f;
             return true;
         }
+
         return false;
     }
 
@@ -341,6 +344,7 @@ abstract public class EditorEx : Editor
         {
             newTxt = EditorGUILayout.TextField(txt);
         }
+
         EndEditableField();
         EditorGUILayout.EndHorizontal();
 
@@ -350,6 +354,7 @@ abstract public class EditorEx : Editor
             txt = newTxt;
             return true;
         }
+
         return false;
     }
 
@@ -408,11 +413,13 @@ abstract public class EditorEx : Editor
         {
             newIndex = EditorGUILayout.Popup(selectedIndex, contentSorted, style);
         }
+
         EditorGUILayout.EndHorizontal();
         if (newIndex != selectedIndex)
         {
             LogUndo(label);
         }
+
         return newIndex;
     }
 
@@ -423,6 +430,7 @@ abstract public class EditorEx : Editor
         {
             list.Add(new ContentWithIndex(content[i], i));
         }
+
         return list.OrderBy(x => x.content).ToList();
     }
 
@@ -438,6 +446,7 @@ abstract public class EditorEx : Editor
         {
             LogUndo(label);
         }
+
         return newEnum;
     }
 
@@ -498,6 +507,7 @@ abstract public class EditorEx : Editor
         {
             EditorUtility.SetDirty(target);
         }
+
         serializedObject.ApplyModifiedProperties();
     }
 
@@ -515,49 +525,26 @@ public class AudioController_Editor : EditorEx
 
     int currentCategoryIndex
     {
-        get
-        {
-            return AC._currentInspectorSelection.currentCategoryIndex;
-        }
-        set
-        {
-            AC._currentInspectorSelection.currentCategoryIndex = value;
-        }
+        get { return AC._currentInspectorSelection.currentCategoryIndex; }
+        set { AC._currentInspectorSelection.currentCategoryIndex = value; }
     }
+
     int currentItemIndex
     {
-        get
-        {
-            return AC._currentInspectorSelection.currentItemIndex;
-        }
-        set
-        {
-            AC._currentInspectorSelection.currentItemIndex = value;
-        }
+        get { return AC._currentInspectorSelection.currentItemIndex; }
+        set { AC._currentInspectorSelection.currentItemIndex = value; }
     }
 
     int currentSubitemIndex
     {
-        get
-        {
-            return AC._currentInspectorSelection.currentSubitemIndex;
-        }
-        set
-        {
-            AC._currentInspectorSelection.currentSubitemIndex = value;
-        }
+        get { return AC._currentInspectorSelection.currentSubitemIndex; }
+        set { AC._currentInspectorSelection.currentSubitemIndex = value; }
     }
 
     int currentPlaylistIndex
     {
-        get
-        {
-            return AC._currentInspectorSelection.currentPlaylistIndex;
-        }
-        set
-        {
-            AC._currentInspectorSelection.currentPlaylistIndex = value;
-        }
+        get { return AC._currentInspectorSelection.currentPlaylistIndex; }
+        set { AC._currentInspectorSelection.currentPlaylistIndex = value; }
     }
 
     public static bool globalFoldout = true;
@@ -587,9 +574,11 @@ public class AudioController_Editor : EditorEx
             {
                 return null;
             }
+
             return AC.AudioCategories[currentCategoryIndex];
         }
     }
+
     AudioItem currentItem
     {
         get
@@ -605,6 +594,7 @@ public class AudioController_Editor : EditorEx
             {
                 return null;
             }
+
             return currentCategory.AudioItems[currentItemIndex];
         }
     }
@@ -624,6 +614,7 @@ public class AudioController_Editor : EditorEx
             {
                 return null;
             }
+
             return curItem.subItems[currentSubitemIndex];
         }
     }
@@ -651,6 +642,7 @@ public class AudioController_Editor : EditorEx
                 {
                     return currentCategory.AudioItems.Length;
                 }
+
                 return 0;
             }
             else
@@ -668,6 +660,7 @@ public class AudioController_Editor : EditorEx
                 {
                     return currentItem.subItems.Length;
                 }
+
                 return 0;
             }
             else
@@ -675,7 +668,9 @@ public class AudioController_Editor : EditorEx
         }
     }
 
-    const string _playWithInspectorNotice = "Volume and pitch of audios are only correct when played during playmode. You can ignore the following Unity warning (if any).";
+    const string _playWithInspectorNotice =
+        "Volume and pitch of audios are only correct when played during playmode. You can ignore the following Unity warning (if any).";
+
     const string _playNotSupportedOnMac = "On MacOS playing audios is only supported during play mode.";
     const string _nameForNewCategoryEntry = "!!! Enter Unique Category Name Here !!!";
     const string _nameForNewAudioItemEntry = "!!! Enter Unique Audio ID Here !!!";
@@ -779,7 +774,7 @@ public class AudioController_Editor : EditorEx
 
         BeginInspectorGUI();
 
-        AC = (AudioController)target;
+        AC = (AudioController) target;
 
         _ValidateCurrentCategoryIndex();
         _ValidateCurrentItemIndex();
@@ -796,29 +791,38 @@ public class AudioController_Editor : EditorEx
         }
 
 
-
         EditorGUILayout.Space();
 
-        if (globalFoldout = EditorGUILayout.Foldout(globalFoldout, "Global Audio Settings", foldoutStyle))
+        if (globalFoldout = EditorGUILayout.Foldout(globalFoldout, AC.IsUseChinese ? "全局音效配置" : "Global Audio Settings", foldoutStyle))
         {
+            EditBool(ref AC.IsUseChinese, AC.IsUseChinese ? "使用中文" : "Is Use Chinese",
+                AC.IsUseChinese ? "界面上的文字会变成中文" : "Text will be in English");
+
             bool currentlyAdditionalController = AC.isAdditionalAudioController;
 
-            bool changed = EditBool(ref currentlyAdditionalController, "Additional Audio Controller", "A scene can contain multiple AudioControllers. All but the main AudioController must be marked as 'additional'.");
+            bool changed = EditBool(ref currentlyAdditionalController, AC.IsUseChinese ? "为附加音频管理器" : "Additional Audio Controller",
+                AC.IsUseChinese
+                    ? "全局只能有一个主管理器，其余都应该为附加管理器"
+                    : "A scene can contain multiple AudioControllers. All but the main AudioController must be marked as 'additional'.");
             if (changed)
             {
                 AC.isAdditionalAudioController = currentlyAdditionalController;
             }
-            EditBool(ref AC.Persistent, "Persist Scene Loading", "A non-persisting AudioController will get destroyed when loading the next scene.");
-            EditBool(ref AC.UnloadAudioClipsOnDestroy, "Unload Audio On Destroy", "This option will unload all AudioClips from memory which referenced by this AudioController if the controller gets destroyed (e.g. when loading a new scene and the AudioController is not persistent). \n" +
-                "Use this option in combination with additional none-persistent AudioControllers to keep only those audios in memory that are used by the current scene. Use the primary persistent AudioController for all global audio that is used throughout all scenes."
-                );
+
+            EditBool(ref AC.Persistent, AC.IsUseChinese ? "场景销毁后保留该控制器" : "Persist Scene Loading",
+                AC.IsUseChinese ? "其实就是是否标记为DontDestroyOnLoad" : "A non-persisting AudioController will get destroyed when loading the next scene.");
+            EditBool(ref AC.UnloadAudioClipsOnDestroy, AC.IsUseChinese ? "在销毁时卸载音频" : "Unload Audio On Destroy", AC.IsUseChinese
+                ? "控制器销毁后是否卸载音频资源,可以与非永久性AudioController(附加型控制器)配合使用"
+                : "This option will unload all AudioClips from memory which referenced by this AudioController if the controller gets destroyed (e.g. when loading a new scene and the AudioController is not persistent). \n" +
+                  "Use this option in combination with additional none-persistent AudioControllers to keep only those audios in memory that are used by the current scene. Use the primary persistent AudioController for all global audio that is used throughout all scenes."
+            );
 
             if (!AC.isAdditionalAudioController)
             {
-
                 bool currentlyDisabled = AC.DisableAudio;
 
-                changed = EditBool(ref currentlyDisabled, "Disable Audio", "Disables all audio");
+                changed = EditBool(ref currentlyDisabled, AC.IsUseChinese ? "禁用音效" : "Disable Audio",
+                    AC.IsUseChinese ? "勾选后无法使用Play()方法播放该控制器下的音频。如果通过修改DisableAudio属性禁用音频，无法停止正在播放的音频，如果想要停止所有音频可以使用StopAll()方法" : "Disables all audio");
                 if (changed)
                 {
                     AC.DisableAudio = currentlyDisabled;
@@ -830,16 +834,26 @@ public class AudioController_Editor : EditorEx
 
                 float vol = AC.Volume;
 
-                EditFloat01(ref vol, "Volume", "%");
+                EditFloat01(ref vol, AC.IsUseChinese ? "音量" : "Volume", "%", AC.IsUseChinese ? "全局音量控制，影响所有音频（包括正在播放的）" : "");
 
                 AC.Volume = vol;
             }
 
-            EditPrefab(ref AC.AudioObjectPrefab, "Audio Object Prefab", "You must specify a prefab here that will get instantiated for each played audio. This prefab must contain the following components: AudioSource, AudioObject, PoolableObject.");
-            EditBool(ref AC.UsePooledAudioObjects, "Use Pooled AudioObjects", "Pooling increases performance when playing many audio files. Strongly recommended particularly on mobile platforms.");
-            EditBool(ref AC.PlayWithZeroVolume, "Play With Zero Volume", "If disabled Play() calls with a volume of zero will not create an AudioObject.");
+            EditPrefab(ref AC.AudioObjectPrefab, AC.IsUseChinese ? "音效item的预制" : "Audio Object Prefab",
+                AC.IsUseChinese
+                    ? "在这里指定一个预制，它将为每个播放的音频实例化。此预制件必须包含以下组件：AudioSource、AudioObject、PoolableObject"
+                    : "You must specify a prefab here that will get instantiated for each played audio. This prefab must contain the following components: AudioSource, AudioObject, PoolableObject.");
+            EditBool(ref AC.UsePooledAudioObjects, AC.IsUseChinese ? "使用对象池" : "Use Pooled AudioObjects",
+                AC.IsUseChinese
+                    ? "播放音频文件时是否使用对象池"
+                    : "Pooling increases performance when playing many audio files. Strongly recommended particularly on mobile platforms.");
+            EditBool(ref AC.PlayWithZeroVolume, AC.IsUseChinese ? "播放音量为0的音效" : "Play With Zero Volume",
+                AC.IsUseChinese
+                    ? "如果禁用了，那么音量为零（全局音量或者Category或AudioItem的Volume为0）的AudioItem的Play()调用，不会创建AudioObject"
+                    : "If disabled Play() calls with a volume of zero will not create an AudioObject.");
 
-            EditBool(ref AC.EqualPowerCrossfade, "Equal-power crossfade", "Unfortunatly not 100% correct due to unknown volume formulas used by Unity");
+            EditBool(ref AC.EqualPowerCrossfade, AC.IsUseChinese ? "使用等功率平移空间化算法" : "Equal-power crossfade",
+                AC.IsUseChinese ? "由于Unity使用了未知的音响volume公式，因此没有100%正确" : "Unfortunatly not 100% correct due to unknown volume formulas used by Unity");
         }
 
         VerticalSpace();
@@ -847,33 +861,39 @@ public class AudioController_Editor : EditorEx
         if (!AC.isAdditionalAudioController)
         {
             // music specific
-            if (musicFoldout = EditorGUILayout.Foldout(musicFoldout, "Music Settings", foldoutStyle))
+            if (musicFoldout = EditorGUILayout.Foldout(musicFoldout, AC.IsUseChinese ? "音乐设置" : "Music Settings", foldoutStyle))
             {
-                EditBool(ref AC.specifyCrossFadeInAndOutSeperately, "Separate crossfade in/out", "Allows to specify a separate fade-in and out value for all music");
+                EditBool(ref AC.specifyCrossFadeInAndOutSeperately, AC.IsUseChinese ? "独立的淡入淡出" : "Separate crossfade in/out",
+                    AC.IsUseChinese ? "允许为所有音乐指定单独的淡入淡出值" : "Allows to specify a separate fade-in and out value for all music");
                 if (AC.specifyCrossFadeInAndOutSeperately)
                 {
                     float v_in = AC.musicCrossFadeTime_In;
-                    EditFloat(ref v_in, "   Music Crossfade-in Time", "sec"); AC.musicCrossFadeTime_In = v_in;
+                    EditFloat(ref v_in, AC.IsUseChinese ? "音乐淡入时间" : "   Music Crossfade-in Time", AC.IsUseChinese ? "秒" : "sec");
+                    AC.musicCrossFadeTime_In = v_in;
 
                     float v_out = AC.musicCrossFadeTime_Out;
-                    EditFloat(ref v_out, "   Music Crossfade-out Time", "sec"); AC.musicCrossFadeTime_Out = v_out;
+                    EditFloat(ref v_out, AC.IsUseChinese ? "音乐淡出时间" : "   Music Crossfade-out Time", AC.IsUseChinese ? "秒" : "sec");
+                    AC.musicCrossFadeTime_Out = v_out;
                 }
                 else
                 {
-                    EditFloat(ref AC.musicCrossFadeTime, "Music Crossfade Time", "sec");
+                    EditFloat(ref AC.musicCrossFadeTime, AC.IsUseChinese ? "统一的音乐淡出淡出时间" : "Music Crossfade Time", AC.IsUseChinese ? "秒" : "sec",
+                        AC.IsUseChinese ? "如果指定淡入淡出时间则使用指定的时间，否则淡入淡出都使用该值" : "");
                 }
             }
 
             VerticalSpace();
 
             // playlist specific
-            if (playlistFoldout = EditorGUILayout.Foldout(playlistFoldout, "Playlist Settings", foldoutStyle))
+            if (playlistFoldout = EditorGUILayout.Foldout(playlistFoldout, AC.IsUseChinese ? "音乐播放列表设置" : "Playlist Settings", foldoutStyle))
             {
                 EditorGUILayout.BeginHorizontal();
                 var playListNames = GetPlaylistNames();
-                currentPlaylistIndex = Popup("Playlist", currentPlaylistIndex, playListNames, "List of audioIDs, click on 'add to playlist' to add audio items", false);
+                currentPlaylistIndex = Popup(AC.IsUseChinese ? "播放列表" : "Playlist", currentPlaylistIndex, playListNames,
+                    AC.IsUseChinese ? "audioID列表，单击“添加到播放列表”添加音频项目" : "List of audioIDs, click on 'add to playlist' to add audio items",
+                    false);
                 GUI.enabled = playListNames.Length > 0;
-                if (GUILayout.Button("Up", GUILayout.Width(35)) && AC.musicPlaylist != null && AC.musicPlaylist.Length > 0)
+                if (GUILayout.Button(AC.IsUseChinese ? "上移" : "Up", GUILayout.Width(35)) && AC.musicPlaylist != null && AC.musicPlaylist.Length > 0)
                 {
                     if (SwapArrayElements(AC.musicPlaylist, currentPlaylistIndex, currentPlaylistIndex - 1))
                     {
@@ -881,7 +901,8 @@ public class AudioController_Editor : EditorEx
                         KeepChanges();
                     }
                 }
-                if (GUILayout.Button("Dwn", GUILayout.Width(40)) && AC.musicPlaylist != null && AC.musicPlaylist.Length > 0)
+
+                if (GUILayout.Button(AC.IsUseChinese ? "下移" : "Dwn", GUILayout.Width(40)) && AC.musicPlaylist != null && AC.musicPlaylist.Length > 0)
                 {
                     if (SwapArrayElements(AC.musicPlaylist, currentPlaylistIndex, currentPlaylistIndex + 1))
                     {
@@ -889,6 +910,7 @@ public class AudioController_Editor : EditorEx
                         KeepChanges();
                     }
                 }
+
                 if (GUILayout.Button("-", GUILayout.Width(25)) && AC.musicPlaylist != null && AC.musicPlaylist.Length > 0)
                 {
                     ArrayHelper.DeleteArrayElement(ref AC.musicPlaylist, currentPlaylistIndex);
@@ -900,17 +922,18 @@ public class AudioController_Editor : EditorEx
 
                 EditorGUILayout.EndHorizontal();
 
-                string itemToAdd = _ChooseItem("Add to Playlist");
+                string itemToAdd = _ChooseItem(AC.IsUseChinese ? "添加到播放列表" : "Add to Playlist");
                 if (!string.IsNullOrEmpty(itemToAdd))
                 {
                     AddToPlayList(itemToAdd);
                 }
 
-                EditBool(ref AC.loopPlaylist, "Loop Playlist");
-                EditBool(ref AC.shufflePlaylist, "Shuffle Playlist", "Enables random playback of music playlists. Takes care that the same audio will not get played again too early");
-                EditBool(ref AC.crossfadePlaylist, "Crossfade Playlist");
-                EditFloat(ref AC.delayBetweenPlaylistTracks, "Delay Betw. Playlist Tracks", "sec");
-
+                EditBool(ref AC.loopPlaylist, AC.IsUseChinese ? "列表内容->循环播放" : "Loop Playlist");
+                EditBool(ref AC.shufflePlaylist, AC.IsUseChinese ? "列表内容->随机播放" : "Shuffle Playlist",
+                    "Enables random playback of music playlists. Takes care that the same audio will not get played again too early");
+                EditBool(ref AC.crossfadePlaylist, AC.IsUseChinese ? "列表内容->使用淡入淡出效果" : "Crossfade Playlist");
+                EditFloat(ref AC.delayBetweenPlaylistTracks, AC.IsUseChinese ? "列表内容->自动播放下一首时延迟播放" : "Delay Betw. Playlist Tracks",
+                    AC.IsUseChinese ? "秒" : "sec");
             }
         }
 
@@ -919,9 +942,8 @@ public class AudioController_Editor : EditorEx
         int categoryCount = AC.AudioCategories != null ? AC.AudioCategories.Length : 0;
         currentCategoryIndex = Mathf.Clamp(currentCategoryIndex, 0, categoryCount - 1);
 
-        if (categoryFoldout = EditorGUILayout.Foldout(categoryFoldout, "Category Settings", foldoutStyle))
+        if (categoryFoldout = EditorGUILayout.Foldout(categoryFoldout, AC.IsUseChinese ? "音频类别设置" : "Category Settings", foldoutStyle))
         {
-
             // Audio Items 
             EditorGUILayout.BeginHorizontal();
 
@@ -929,7 +951,7 @@ public class AudioController_Editor : EditorEx
 
             var categoryNames = GetCategoryNames();
 
-            int newCategoryIndex = PopupWithStyle("Category", currentCategoryIndex, categoryNames, popupStyleColored);
+            int newCategoryIndex = PopupWithStyle(AC.IsUseChinese ? "音频类别" : "Category", currentCategoryIndex, categoryNames, popupStyleColored);
             if (GUILayout.Button("+", GUILayout.Width(30)))
             {
                 bool lastEntryIsNew = false;
@@ -951,7 +973,6 @@ public class AudioController_Editor : EditorEx
 
             if (GUILayout.Button("-", GUILayout.Width(30)) && categoryCount > 0)
             {
-
                 if (currentCategoryIndex < AC.AudioCategories.Length - 1)
                 {
                     newCategoryIndex = currentCategoryIndex;
@@ -960,6 +981,7 @@ public class AudioController_Editor : EditorEx
                 {
                     newCategoryIndex = Mathf.Max(currentCategoryIndex - 1, 0);
                 }
+
                 ArrayHelper.DeleteArrayElement(ref AC.AudioCategories, currentCategoryIndex);
                 KeepChanges();
             }
@@ -984,23 +1006,31 @@ public class AudioController_Editor : EditorEx
                 {
                     curCat.audioController = AC;
                 }
+
                 if (justCreatedNewCategory)
                 {
                     SetFocusForNextEditableField();
                 }
-                EditString(ref curCat.Name, "Name", curCat.Name == _nameForNewCategoryEntry ? textAttentionStyle : null);
+
+                EditString(ref curCat.Name, AC.IsUseChinese ? "类别名称" : "Name", curCat.Name == _nameForNewCategoryEntry ? textAttentionStyle : null);
 
                 float volTmp = curCat.Volume;
-                EditFloat01(ref volTmp, "Volume", " %");
+                EditFloat01(ref volTmp, AC.IsUseChinese ? "音量" : "Volume", " %");
                 curCat.Volume = volTmp;
 
-                EditPrefab(ref curCat.AudioObjectPrefab, "Audio Object Prefab Override", "Use different Audio Object prefabs if you want to specify different parameters such as the volume rolloff etc. per category");
+                EditPrefab(ref curCat.AudioObjectPrefab, AC.IsUseChinese ? "重载音频item的预制" : "Audio Object Prefab Override",
+                    AC.IsUseChinese
+                        ? "如果要为每个类别指定不同的参数（如音量衰减等），请使用不同的音频对象预制"
+                        : "Use different Audio Object prefabs if you want to specify different parameters such as the volume rolloff etc. per category");
 
                 int selectedParentCategoryIndex;
 
                 var catList = _GenerateCategoryListIncludingNone(out selectedParentCategoryIndex, curCat.parentCategory);
 
-                int newIndex = Popup("Parent Category", selectedParentCategoryIndex, catList, "The effective volume of a category is multiplied with the volume of the parent category.");
+                int newIndex = Popup(AC.IsUseChinese ? "父类别" : "Parent Category", selectedParentCategoryIndex, catList,
+                    AC.IsUseChinese
+                        ? "在某些特殊的情况下可能需要父类别，字类别继承父类别的音量大小，类别的音量为自身音量乘以父类别的音量"
+                        : "The effective volume of a category is multiplied with the volume of the parent category.");
                 if (newIndex != selectedParentCategoryIndex)
                 {
                     KeepChanges();
@@ -1027,15 +1057,14 @@ public class AudioController_Editor : EditorEx
                 }*/
 
 
-
                 VerticalSpace();
 
                 AudioItem curItem = currentItem;
 
-                if (itemFoldout = EditorGUILayout.Foldout(itemFoldout, "Audio Item Settings", foldoutStyle))
+                if (itemFoldout = EditorGUILayout.Foldout(itemFoldout, AC.IsUseChinese ? "音频项设置" : "Audio Item Settings", foldoutStyle))
                 {
                     EditorGUILayout.BeginHorizontal();
-                    if (GUILayout.Button("Add selected audio clips", EditorStyles.miniButton))
+                    if (GUILayout.Button(AC.IsUseChinese ? "添加选中的音效至该类别中" : "Add selected audio clips", EditorStyles.miniButton))
                     {
                         AudioClip[] audioClips = GetSelectedAudioclips();
                         if (audioClips.Length > 0)
@@ -1050,19 +1079,20 @@ public class AudioController_Editor : EditorEx
                                 ArrayHelper.AddArrayElement(ref audioItem.subItems).Clip = audioClip;
                                 currentItemIndex++;
                             }
+
                             currentItemIndex = firstIndex;
                             KeepChanges();
                         }
                     }
 
-                    GUILayout.Label("use inspector lock!");
+                    GUILayout.Label(AC.IsUseChinese ? "使用的时候锁住Inspector面板" : "use inspector lock!");
                     EditorGUILayout.EndHorizontal();
 
                     // AudioItems
 
                     EditorGUILayout.BeginHorizontal();
 
-                    int newItemIndex = PopupWithStyle("Item", currentItemIndex, GetItemNames(), popupStyleColored);
+                    int newItemIndex = PopupWithStyle(AC.IsUseChinese ? "音频项" : "Item", currentItemIndex, GetItemNames(), popupStyleColored);
                     bool justCreatedNewItem = false;
 
 
@@ -1095,10 +1125,10 @@ public class AudioController_Editor : EditorEx
                         {
                             newItemIndex = Mathf.Max(currentItemIndex - 1, 0);
                         }
+
                         ArrayHelper.DeleteArrayElement(ref curCat.AudioItems, currentItemIndex);
                         KeepChanges();
                     }
-
 
 
                     if (newItemIndex != currentItemIndex)
@@ -1124,7 +1154,8 @@ public class AudioController_Editor : EditorEx
 
                         string originalName = curItem.Name;
 
-                        if (EditString(ref curItem.Name, "Name", isNewDummyName ? textAttentionStyle : null, "You must specify a unique name here (=audioID). This is the ID used in the script code to play this audio item."))
+                        if (EditString(ref curItem.Name, AC.IsUseChinese ? "音频项名称" : "Name", isNewDummyName ? textAttentionStyle : null,
+                            "You must specify a unique name here (=audioID). This is the ID used in the script code to play this audio item."))
                         {
                             if (!isNewDummyName)
                             {
@@ -1140,7 +1171,7 @@ public class AudioController_Editor : EditorEx
 
                         GUILayout.EndHorizontal();
 
-                        int newItemCategoryIndex = Popup("Move to Category", currentCategoryIndex, GetCategoryNames());
+                        int newItemCategoryIndex = Popup(AC.IsUseChinese ? "移动到该类别中" : "Move to Category", currentCategoryIndex, GetCategoryNames());
 
                         if (newItemCategoryIndex != currentCategoryIndex)
                         {
@@ -1154,40 +1185,79 @@ public class AudioController_Editor : EditorEx
                             currentItemIndex = newCat.AudioItems.Length - 1;
                         }
 
-                        if (EditFloat01(ref curItem.Volume, "Volume", " %"))
+                        if (EditFloat01(ref curItem.Volume, AC.IsUseChinese ? "音量" : "Volume", " %"))
                         {
                             _AdjustVolumeOfAllAudioItems(curItem, null);
                         }
-                        EditFloat(ref curItem.Delay, "Delay", "sec", "Delays the playback");
-                        EditFloat(ref curItem.MinTimeBetweenPlayCalls, "Min Time Between Play", "sec", "If the same audio item gets played multiple times within this time frame the playback is skipped. This can prevent unwanted audio artifacts.");
-                        EditInt(ref curItem.MaxInstanceCount, "Max Instance Count", "", "Sets the maximum number of simultaneously playing audio files of this particular audio item. If the maximum number would be exceeded, the oldest playing audio gets stopped.");
 
-                        EditBool(ref curItem.DestroyOnLoad, "Stop When Scene Loads", "If disabled, this audio item will continue playing even if a different scene is loaded.");
+                        EditFloat(ref curItem.Delay, AC.IsUseChinese ? "延迟" : "Delay", AC.IsUseChinese ? "秒" : "sec",
+                            AC.IsUseChinese ? "延迟播放" : "Delays the playback");
+                        EditFloat(ref curItem.MinTimeBetweenPlayCalls, AC.IsUseChinese ? "两次播放之间的最小间隔" : "Min Time Between Play", AC.IsUseChinese ? "秒" : "sec",
+                            AC.IsUseChinese
+                                ? "如果同一音频项目在此时间范围内多次播放，则播放将被跳过。 这可以防止不必要的音频伪像（数据的确定性失真）。也就是两次播放同一音效中间的强制间隔"
+                                : "If the same audio item gets played multiple times within this time frame the playback is skipped. This can prevent unwanted audio artifacts.");
+                        EditInt(ref curItem.MaxInstanceCount, AC.IsUseChinese ? "最大实例数量" : "Max Instance Count", "",
+                            AC.IsUseChinese
+                                ? "  设置该特定音频项目同时播放的音频文件的最大数量。 如果超过最大数量，最旧的播放音频将停止"
+                                : "Sets the maximum number of simultaneously playing audio files of this particular audio item. If the maximum number would be exceeded, the oldest playing audio gets stopped.");
 
-                        if ((int)curItem.Loop == 3) // deprecated gapless looping
+                        EditBool(ref curItem.DestroyOnLoad, AC.IsUseChinese ? "当加载场景时停止播放" : "Stop When Scene Loads",
+                            AC.IsUseChinese
+                                ? "如果禁用，即使加载了不同的场景，该音频项目也将继续播放。但是这个的优先级低于音频预制上PoolableObject脚本的DoNotDestroyOnLoad属性"
+                                : "If disabled, this audio item will continue playing even if a different scene is loaded.");
+
+                        if ((int) curItem.Loop == 3) // deprecated gapless looping
                         {
                             curItem.Loop = AudioItem.LoopMode.LoopSequence;
                             KeepChanges();
                         }
 
-                        curItem.Loop = (AudioItem.LoopMode)EnumPopup("Loop Mode", curItem.Loop, "The Loop mode determines how the audio subitems are looped. \n'LoopSubitem' means that the chosen sub-item will loop. \n'LoopSequence' means that one subitem is played after the other. In which order the subitems are chosen depends on the subitem pick mode.");
+                        curItem.Loop = (AudioItem.LoopMode) EnumPopup(AC.IsUseChinese ? "循环播放模式" : "Loop Mode", curItem.Loop,
+                            AC.IsUseChinese
+                                ? "循环模式确定音频子项的循环方式\n" +
+                                  "- DoNotLoop\n   不循环\n\n" +
+                                  "- LoopSubitem\n   循环抽取子音频（只抽一次 ，自定义抽取\n\n" +
+                                  "- LoopSequence\n   每次播完都重新从子音频列表中抽取\n   抽取N次，自定义抽取\n\n" +
+                                  "- PlaySequenceAndLoopLast\n   每次播完都重新从子音频列表中抽取\n   单曲循环最后一次抽取到的音频\n   抽取子音频列表容量次数，自定义抽取\n\n" +
+                                  "- IntroLoopOutroSequence\n   每次播完都重新从子音频列表中抽取\n   单曲循环倒数第二次抽取到的音频\n   抽取子音频列表容量 - 1次数\n   只能按照子音频列表顺序抽取"
+                                : "The Loop mode determines how the audio subitems are looped. \n'LoopSubitem' means that the chosen sub-item will loop. \n'LoopSequence' means that one subitem is played after the other. In which order the subitems are chosen depends on the subitem pick mode.");
 
                         if (curItem.Loop == AudioItem.LoopMode.LoopSequence ||
-                             curItem.Loop == AudioItem.LoopMode.PlaySequenceAndLoopLast ||
-                             curItem.Loop == AudioItem.LoopMode.IntroLoopOutroSequence)
+                            curItem.Loop == AudioItem.LoopMode.PlaySequenceAndLoopLast ||
+                            curItem.Loop == AudioItem.LoopMode.IntroLoopOutroSequence)
                         {
-                            EditInt(ref curItem.loopSequenceCount, "   Stop after subitems", "", "Playing will stop after this number of different subitems were played. Specify zero to play endlessly in LoopSequence mode or play all sub-items in <c>PlaySequenceAndLoopLast</c> and <c>IntroLoopOutroSequence</c> mode");
-                            EditFloat(ref curItem.loopSequenceOverlap, "   Overlap", "sec", "Positive values mean that subitems will play overlapping, negative values mean that a delay is inserted before playing the next subitem in the 'LoopSequence'.");
-                            EditFloat(ref curItem.loopSequenceRandomDelay, "   Random Delay", "sec", "A random delay between 0 and this value will be added between two subsequent subitems. Can be combined with the 'Overlap' value.");
+                            EditInt(ref curItem.loopSequenceCount, AC.IsUseChinese ? "   抽取(播放)次数" : "   Stop after subitems", "",
+                                AC.IsUseChinese
+                                    ? "抽取次数（播放次数），播放完该数量的不同子音频后，播放将停止。\n" +
+                                      " 填0可在 LoopSequence 模式下无限播放或在 PlaySequenceAndLoopLast和IntroLoopOutroSequence模式下播放子音频列表容量次数。\n" +
+                                      "需要注意的地方：在PlaySequenceAndLoopLast模式下：填1，播放完1次音频后直接停止；大于1时，循环最后一个音频。\n" +
+                                      "在IntroLoopOutroSequence模式下：填1，播放完1次音频后直接停止；填2，循环第2个音频；大于2时，循环倒数第二个音频"
+                                    : "Playing will stop after this number of different subitems were played. Specify zero to play endlessly in LoopSequence mode or play all sub-items in <c>PlaySequenceAndLoopLast</c> and <c>IntroLoopOutroSequence</c> mode");
+                            EditFloat(ref curItem.loopSequenceOverlap, AC.IsUseChinese ? "   重叠时间" : "   Overlap", AC.IsUseChinese ? "秒" : "sec",
+                                AC.IsUseChinese
+                                    ? "正值意味着子音频将重叠播放，负值意味着在播放“LoopSequence”中的下一个子项目之前插入延迟。"
+                                    : "Positive values mean that subitems will play overlapping, negative values mean that a delay is inserted before playing the next subitem in the 'LoopSequence'.");
+                            EditFloat(ref curItem.loopSequenceRandomDelay, AC.IsUseChinese ? "   随机延迟" : "   Random Delay", AC.IsUseChinese ? "秒" : "sec",
+                                AC.IsUseChinese
+                                    ? "将在两个后续子项之间添加 0 和该值之间的随机延迟。 可以与“Overlap”值结合使用。最终延迟的值 = Random Delay - Overlap；"
+                                    : "A random delay between 0 and this value will be added between two subsequent subitems. Can be combined with the 'Overlap' value.");
                         }
-                        EditBool(ref curItem.overrideAudioSourceSettings, "Override AudioSource Settings");
+
+                        EditBool(ref curItem.overrideAudioSourceSettings, AC.IsUseChinese ? "重载AudioSource中的设置" : "Override AudioSource Settings",
+                            AC.IsUseChinese ? "是否重写AudioSource中的参数，针对3D音效" : "");
 
                         if (curItem.overrideAudioSourceSettings)
                         {
                             //EditorGUI.indentLevel++;
 
-                            EditFloat(ref curItem.audioSource_MinDistance, "   Min Distance", "", "Overrides the 'Min Distance' parameter in the AudioSource settings of the AudioObject prefab (for 3d sounds)");
-                            EditFloat(ref curItem.audioSource_MaxDistance, "   Max Distance", "", "Overrides the 'Max Distance' parameter in the AudioSource settings of the AudioObject prefab (for 3d sounds)");
+                            EditFloat(ref curItem.audioSource_MinDistance, AC.IsUseChinese ? "   最小距离" : "   Min Distance", "",
+                                AC.IsUseChinese
+                                    ? "覆盖 AudioObject 预制件的 AudioSource 设置中的“最小距离”参数（对于 3d 声音）"
+                                    : "Overrides the 'Min Distance' parameter in the AudioSource settings of the AudioObject prefab (for 3d sounds)");
+                            EditFloat(ref curItem.audioSource_MaxDistance, AC.IsUseChinese ? "   最大距离" : "   Max Distance", "",
+                                AC.IsUseChinese
+                                    ? "覆盖 AudioObject 预制件的 AudioSource 设置中的“最大距离”参数（对于 3d 声音）"
+                                    : "Overrides the 'Max Distance' parameter in the AudioSource settings of the AudioObject prefab (for 3d sounds)");
 
                             //EditorGUI.indentLevel--;
                         }
@@ -1197,7 +1267,19 @@ public class AudioController_Editor : EditorEx
                             EditorGUI.BeginDisabledGroup(true);
                             curItem.SubItemPickMode = AudioPickSubItemMode.StartLoopSequenceWithFirst;
                         }
-                        curItem.SubItemPickMode = (AudioPickSubItemMode)EnumPopup("Pick Subitem Mode", curItem.SubItemPickMode, "Determines which subitem is chosen when the audio item is played.");
+
+                        curItem.SubItemPickMode = (AudioPickSubItemMode) EnumPopup(AC.IsUseChinese ? "抽取子音效的模式" : "Pick Subitem Mode", curItem.SubItemPickMode,
+                            AC.IsUseChinese
+                                ? "确定播放音频项目时选择哪个子音效。\n" +
+                                  "- Disabled\n   禁用音频，不会抽取任何音频\n\n" +
+                                  "- Random\n   随机抽取（按照AudioSubItem.Probability权重）\n\n" +
+                                  "- RandomNotSameTwice\n   随机抽取（按照AudioSubItem.Probability权重）\n   不会连续抽取到相同的音频\n\n" +
+                                  "- Sequence\n   顺序抽取，从第一个开始依次选择序列中的子项\n\n" +
+                                  "- SequenceWithRandomStart\n   随机抽取一个音频，然后从这个音频开始顺序抽取\n\n" +
+                                  "- AllSimultaneously\n   同时抽取（播放）所有子音频\n\n" +
+                                  "- TwoSimultaneously\n   同时抽取（播放）两个不同的音频\n\n" +
+                                  "- StartLoopSequenceWithFirst\n   按顺序从第一个开始抽取"
+                                : "Determines which subitem is chosen when the audio item is played.");
                         if (curItem.Loop == AudioItem.LoopMode.IntroLoopOutroSequence)
                         {
                             EditorGUI.EndDisabledGroup();
@@ -1249,10 +1331,10 @@ public class AudioController_Editor : EditorEx
                         currentSubitemIndex = Mathf.Clamp(currentSubitemIndex, 0, subItemCount - 1);
                         AudioSubItem subItem = currentSubItem;
 
-                        if (subitemFoldout = EditorGUILayout.Foldout(subitemFoldout, "Audio Sub-Item Settings", foldoutStyle))
+                        if (subitemFoldout = EditorGUILayout.Foldout(subitemFoldout, AC.IsUseChinese ? "音频列表设置" : "Audio Sub-Item Settings", foldoutStyle))
                         {
                             EditorGUILayout.BeginHorizontal();
-                            if (GUILayout.Button("Add selected audio clips", EditorStyles.miniButton))
+                            if (GUILayout.Button(AC.IsUseChinese ? "添加选中的音效至该音频项中" : "Add selected audio clips", EditorStyles.miniButton))
                             {
                                 AudioClip[] audioClips = GetSelectedAudioclips();
                                 if (audioClips.Length > 0)
@@ -1264,16 +1346,18 @@ public class AudioController_Editor : EditorEx
                                         ArrayHelper.AddArrayElement(ref curItem.subItems).Clip = audioClip;
                                         currentSubitemIndex++;
                                     }
+
                                     currentSubitemIndex = firstIndex;
                                     KeepChanges();
                                 }
                             }
-                            GUILayout.Label("use inspector lock!");
+
+                            GUILayout.Label(AC.IsUseChinese ? "使用的时候锁住Inspector面板" : "use inspector lock!");
                             EditorGUILayout.EndHorizontal();
 
                             EditorGUILayout.BeginHorizontal();
 
-                            currentSubitemIndex = PopupWithStyle("SubItem", currentSubitemIndex, GetSubitemNames(), popupStyleColored);
+                            currentSubitemIndex = PopupWithStyle(AC.IsUseChinese ? "音效" : "SubItem", currentSubitemIndex, GetSubitemNames(), popupStyleColored);
 
                             if (GUILayout.Button("+", GUILayout.Width(30)))
                             {
@@ -1288,6 +1372,7 @@ public class AudioController_Editor : EditorEx
                                     {
                                         lastEntryIsNew = curItem.subItems[currentSubitemIndex].Clip == null;
                                     }
+
                                     if (curSubItemType == AudioSubItemType.Item)
                                     {
                                         lastEntryIsNew = curItem.subItems[currentSubitemIndex].ItemModeAudioID == null ||
@@ -1311,8 +1396,10 @@ public class AudioController_Editor : EditorEx
                                 {
                                     currentSubitemIndex = Mathf.Max(curItem.subItems.Length - 1, 0);
                                 }
+
                                 KeepChanges();
                             }
+
                             EditorGUILayout.EndHorizontal();
 
                             subItem = currentSubItem;
@@ -1325,7 +1412,6 @@ public class AudioController_Editor : EditorEx
                                 if (subItem.SubItemType == AudioSubItemType.Item)
                                 {
                                     _DisplaySubItem_Item(subItem);
-
                                 }
                                 else
                                 {
@@ -1374,6 +1460,7 @@ public class AudioController_Editor : EditorEx
                     AudioController.StopAll();
                 }
             }
+
             if (GUILayout.Button("Stop Music Only"))
             {
                 if (EditorApplication.isPlaying && AudioController.DoesInstanceExist())
@@ -1381,6 +1468,7 @@ public class AudioController_Editor : EditorEx
                     AudioController.StopMusic();
                 }
             }
+
             EditorGUILayout.EndHorizontal();
         }
 
@@ -1424,6 +1512,7 @@ public class AudioController_Editor : EditorEx
                 {
                     continue;
                 }
+
                 names[index] = AC.AudioCategories[i].Name;
                 if (selectedAudioCategory == AC.AudioCategories[i])
                 {
@@ -1467,6 +1556,7 @@ public class AudioController_Editor : EditorEx
 
             cat = cat.parentCategory;
         }
+
         return false;
     }
 
@@ -1474,6 +1564,7 @@ public class AudioController_Editor : EditorEx
     {
         return EditorApplication.isPlaying && AudioController.DoesInstanceExist();
     }
+
     private void _ValidateCurrentCategoryIndex()
     {
         int categoryCount = currentCategoryCount;
@@ -1504,14 +1595,22 @@ public class AudioController_Editor : EditorEx
         int curIndex = 0;
         switch (subItem.SubItemType)
         {
-            case AudioSubItemType.Clip: curIndex = 0; break;
-            case AudioSubItemType.Item: curIndex = 1; break;
+            case AudioSubItemType.Clip:
+                curIndex = 0;
+                break;
+            case AudioSubItemType.Item:
+                curIndex = 1;
+                break;
         }
 
-        switch (Popup("SubItem Type", curIndex, typeNames))
+        switch (Popup(AC.IsUseChinese ? "子音频类型" : "SubItem Type", curIndex, typeNames))
         {
-            case 0: subItem.SubItemType = AudioSubItemType.Clip; break;
-            case 1: subItem.SubItemType = AudioSubItemType.Item; break;
+            case 0:
+                subItem.SubItemType = AudioSubItemType.Clip;
+                break;
+            case 1:
+                subItem.SubItemType = AudioSubItemType.Item;
+                break;
         }
 
         //subItem.SubItemType = (AudioSubItemType) EnumPopup( "SubItem Type", subItem.SubItemType );
@@ -1528,46 +1627,61 @@ public class AudioController_Editor : EditorEx
     {
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label(label, styleLabel);
-        clip = (AudioClip)EditorGUILayout.ObjectField(clip, typeof(AudioClip), false);
+        clip = (AudioClip) EditorGUILayout.ObjectField(clip, typeof(AudioClip), false);
         if (clip)
         {
             EditorGUILayout.Space();
             GUILayout.Label(string.Format("{0:0.0} sec", clip.length), GUILayout.Width(60));
         }
+
         EditorGUILayout.EndHorizontal();
     }
 
     private void _DisplaySubItem_Clip(AudioSubItem subItem, int subItemCount, AudioItem curItem)
     {
-
         // AudioSubItems
 
         if (subItem != null)
         {
-            EditAudioClip(ref subItem.Clip, "Audio Clip");
+            EditAudioClip(ref subItem.Clip, AC.IsUseChinese ? "对应的音效文件" : "Audio Clip");
 
-            if (EditFloat01(ref subItem.Volume, "Volume", " %"))
+            if (EditFloat01(ref subItem.Volume, AC.IsUseChinese ? "音量" : "Volume", " %"))
             {
                 _AdjustVolumeOfAllAudioItems(curItem, subItem);
             }
 
-            EditFloat01(ref subItem.RandomVolume, "Random Volume", "±%");
+            EditFloat01(ref subItem.RandomVolume, AC.IsUseChinese ? "随机音量" : "Random Volume", "±%",
+                AC.IsUseChinese ? "随机改变音量，最终的音量 =  音量 + （-RandomVolume，RandomVolume）的随机值" : "");
 
-            EditFloat(ref subItem.Delay, "Delay", "sec");
-            EditFloat(ref subItem.RandomDelay, "Random Delay", "sec");
+            EditFloat(ref subItem.Delay, AC.IsUseChinese ? "延迟" : "Delay", "sec", AC.IsUseChinese ? "延迟播放时间" : "");
+            EditFloat(ref subItem.RandomDelay, AC.IsUseChinese ? "随机延迟" : "Random Delay", "sec", AC.IsUseChinese ? "随机添加 0 到 RandomDelay 之间的延迟" : "");
             //EditFloatWithinRange( ref subItem.Pan2D, "Pan2D [left..right]", -1.0f, 1.0f);
-            EditFloatPlusMinus1(ref subItem.Pan2D, "Pan2D", "%left/right");
+            EditFloatPlusMinus1(ref subItem.Pan2D, AC.IsUseChinese ? "设置 2D 声音的立体声位置" : "Pan2D", "%left/right");
             if (_IsRandomItemMode(curItem.SubItemPickMode))
             {
-                EditFloat01(ref subItem.Probability, "Probability", " %", "Choose a higher value (in comparison to the probability values of the other audio clips) to increase the probability for this clip when using a random subitem pick mode.");
+                EditFloat01(ref subItem.Probability, AC.IsUseChinese ? "权重" : "Probability", " %",
+                    AC.IsUseChinese
+                        ? "当抽取模式为随机抽取时，该值代表抽取权重"
+                        : "Choose a higher value (in comparison to the probability values of the other audio clips) to increase the probability for this clip when using a random subitem pick mode.");
             }
-            EditFloat(ref subItem.PitchShift, "Pitch Shift", "semitone");
-            EditFloat(ref subItem.RandomPitch, "Random Pitch", "±semitone");
-            EditFloat(ref subItem.FadeIn, "Fade-in", "sec");
-            EditFloat(ref subItem.FadeOut, "Fade-out", "sec");
-            EditFloat(ref subItem.ClipStartTime, "Start at", "sec");
-            EditFloat(ref subItem.ClipStopTime, "Stop at", "sec");
-            EditBool(ref subItem.RandomStartPosition, "Random Start Position", "Starts playing at a random position. Useful when looping.");
+
+            EditFloat(ref subItem.PitchShift, AC.IsUseChinese ? "音高" : "Pitch Shift", "semitone",
+                AC.IsUseChinese
+                    ? "  以半音为单位改变音高。" +
+                      "音频源的音高。音高是一种让旋律更高或更低的品质。" +
+                      "例如，请想象一下正在播放一个音高设置为 1 的音频剪辑。在播放该剪辑时，增加音高会使剪辑听起来更悠扬。" +
+                      "类似地，将音高减小到 1 以下会使剪辑声音变得低沉。"
+                    : "");
+            EditFloat(ref subItem.RandomPitch, AC.IsUseChinese ? "随机音高" : "Random Pitch", "±semitone",
+                AC.IsUseChinese ? "以半音为单位随机改变音高最终音高 = 原音高 * （-RandomPitch，RandomPitch）" : "");
+            EditFloat(ref subItem.FadeIn, AC.IsUseChinese ? "淡入时间" : "Fade-in", "sec");
+            EditFloat(ref subItem.FadeOut, AC.IsUseChinese ? "淡出时间" : "Fade-out", "sec");
+            EditFloat(ref subItem.ClipStartTime, AC.IsUseChinese ? "开始时间点" : "Start at", "sec",
+                AC.IsUseChinese ? "音频开始播放的时间，也就是可以选择在该音频的某个时间段开始播放而不是从头开始" : "");
+            EditFloat(ref subItem.ClipStopTime, AC.IsUseChinese ? "结束时间点" : "Stop at", "sec",
+                AC.IsUseChinese ? "音频结束播放的时间，也就是可以选择在该音频的某个时间段结束播放而不是在音频完全播放完毕后结束" : "");
+            EditBool(ref subItem.RandomStartPosition, AC.IsUseChinese ? "随机开始时间点" : "Random Start Position",
+                AC.IsUseChinese ? "在音频长度内（Stop - Start）的某个时间点开始播放" : "Starts playing at a random position. Useful when looping.");
         }
 
         EditorGUILayout.BeginHorizontal();
@@ -1577,7 +1691,7 @@ public class AudioController_Editor : EditorEx
 #if UNITY_3_x
 #else
         GUI.enabled = _IsAudioControllerInPlayMode();
-#endif 
+#endif
 
         if (GUILayout.Button("Play", GUILayout.Width(60)) && subItem != null)
         {
@@ -1593,7 +1707,6 @@ public class AudioController_Editor : EditorEx
                     pos = Vector3.zero;
 
                 AudioController.Instance.PlayAudioSubItem(subItem, 1, pos, null, 0, 0, false, null);
-
             }
             else
             {
@@ -1613,8 +1726,6 @@ public class AudioController_Editor : EditorEx
         GUI.enabled = true;
 
         EditorGUILayout.EndHorizontal();
-
-
     }
 
     private void _AdjustVolumeOfAllAudioItems(AudioItem curItem, AudioSubItem subItem)
@@ -1630,6 +1741,7 @@ public class AudioController_Editor : EditorEx
                 {
                     if (subItem != a.subItem) continue;
                 }
+
                 a.volumeItem = a.audioItem.Volume * a.subItem.Volume;
             }
         }
@@ -1643,6 +1755,7 @@ public class AudioController_Editor : EditorEx
             case AudioPickSubItemMode.RandomNotSameTwice: return true;
             case AudioPickSubItemMode.TwoSimultaneously: return true;
         }
+
         return false;
     }
 
@@ -1656,6 +1769,7 @@ public class AudioController_Editor : EditorEx
             string[] possibleAudioIDs = _GetPossibleAudioIDs(false, "Choose Audio Item...");
             return possibleAudioIDs[selected];
         }
+
         return null;
     }
 
@@ -1674,7 +1788,8 @@ public class AudioController_Editor : EditorEx
             {
                 if (possibleAudioIDs[i].ToLowerInvariant() == idToSearch)
                 {
-                    audioIndex = i; break;
+                    audioIndex = i;
+                    break;
                 }
             }
         }
@@ -1706,6 +1821,7 @@ public class AudioController_Editor : EditorEx
                 _GetAllAudioIDs(audioIDs, category, withCategoryName);
             }
         }
+
         return audioIDs.ToArray();
     }
 
@@ -1754,6 +1870,7 @@ public class AudioController_Editor : EditorEx
         {
             return new string[0];
         }
+
         var names = new string[AC.AudioCategories.Length];
         for (int i = 0; i < AC.AudioCategories.Length; i++)
         {
@@ -1764,6 +1881,7 @@ public class AudioController_Editor : EditorEx
                 names[i] = "---";
             }
         }
+
         return names;
     }
 
@@ -1785,6 +1903,7 @@ public class AudioController_Editor : EditorEx
                 names[i] = "---";
             }
         }
+
         return names;
     }
 
@@ -1807,9 +1926,11 @@ public class AudioController_Editor : EditorEx
             }
             else
             {
-                names[i] = string.Format("CLIP {0}: {1}", i, (curItem.subItems[i] != null ? curItem.subItems[i].Clip ? curItem.subItems[i].Clip.name : "*unset*" : ""));
+                names[i] = string.Format("CLIP {0}: {1}", i,
+                    (curItem.subItems[i] != null ? curItem.subItems[i].Clip ? curItem.subItems[i].Clip.name : "*unset*" : ""));
             }
         }
+
         return names;
     }
 
@@ -1825,6 +1946,7 @@ public class AudioController_Editor : EditorEx
         {
             names[i] = string.Format("{0}: {1}", i, AC.musicPlaylist[i]);
         }
+
         return names;
     }
 
@@ -1835,7 +1957,7 @@ public class AudioController_Editor : EditorEx
 
         for (int i = 0; i < objList.Length; i++)
         {
-            clipList[i] = (AudioClip)objList[i];
+            clipList[i] = (AudioClip) objList[i];
         }
 
         return clipList;
@@ -1850,6 +1972,7 @@ public class AudioController_Editor : EditorEx
                 return cat;
             }
         }
+
         return null;
     }
 }

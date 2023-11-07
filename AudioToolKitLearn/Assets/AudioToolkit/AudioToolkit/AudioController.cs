@@ -126,6 +126,8 @@ public class AudioController : SingletonMonoBehaviour<AudioController>
     /// </summary>
     public const string AUDIO_TOOLKIT_VERSION = "6.5";
 
+    public bool IsUseChinese = false; //是否使用中文
+
     /// <summary>
     /// Disables all audio playback.
     /// </summary>
