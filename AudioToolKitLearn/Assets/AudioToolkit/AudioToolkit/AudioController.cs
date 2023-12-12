@@ -2075,7 +2075,7 @@ public class AudioController : SingletonMonoBehaviour<AudioController>
 
     static private void _UpdateSystemTime()
     {
-        double newSystemTime = SystemTime.timeSinceLaunch;
+        double newSystemTime = Time.realtimeSinceStartupAsDouble; //SystemTime.timeSinceLaunch;
 
         if (_lastSystemTime >= 0)
         {
