@@ -2080,6 +2080,9 @@ public class AudioController : SingletonMonoBehaviour<AudioController>
         if (_lastSystemTime >= 0)
         {
             _systemDeltaTime = newSystemTime - _lastSystemTime;
+			
+			if (_systemDeltaTime < 0) _systemDeltaTime = 0;
+			
             if (_systemDeltaTime <= Time.maximumDeltaTime + 0.01f)
             {
                 _systemTime += _systemDeltaTime;
