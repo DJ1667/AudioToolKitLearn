@@ -115,7 +115,7 @@ abstract public class EditorEx : Editor
         EditorGUILayout.LabelField(new GUIContent(label, tooltip), labelFieldOption);
         //EditorGUILayout.Space();
         float f_ret = f;
-        f_ret = (float) EditorGUILayout.IntField(Mathf.RoundToInt(f_ret * 100), styleFloat, GUILayout.Width(50)) / 100;
+        f_ret = (float)EditorGUILayout.IntField(Mathf.RoundToInt(f_ret * 100), styleFloat, GUILayout.Width(50)) / 100;
         f_ret = GUILayout.HorizontalSlider(f_ret, 0, 1);
 
         if (!string.IsNullOrEmpty(unit))
@@ -137,7 +137,7 @@ abstract public class EditorEx : Editor
         GUILayout.Label(label, styleLabel);
         //EditorGUILayout.Space();
         float f_ret = f;
-        f_ret = (float) EditorGUILayout.IntField(Mathf.RoundToInt(f_ret * 100), styleFloat, GUILayout.Width(50)) / 100;
+        f_ret = (float)EditorGUILayout.IntField(Mathf.RoundToInt(f_ret * 100), styleFloat, GUILayout.Width(50)) / 100;
         f_ret = GUILayout.HorizontalSlider(f_ret, -1, 1);
         if (!string.IsNullOrEmpty(unit))
         {
@@ -314,7 +314,7 @@ abstract public class EditorEx : Editor
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField(new GUIContent(label, tooltip), labelFieldOption);
         //GUILayout.Label( label, styleLabel );
-        T new_f = (T) EditorGUILayout.ObjectField(prefab, typeof(T), false);
+        T new_f = (T)EditorGUILayout.ObjectField(prefab, typeof(T), false);
         EditorGUILayout.EndHorizontal();
 
         if (new_f != prefab)
@@ -774,7 +774,7 @@ public class AudioController_Editor : EditorEx
 
         BeginInspectorGUI();
 
-        AC = (AudioController) target;
+        AC = (AudioController)target;
 
         _ValidateCurrentCategoryIndex();
         _ValidateCurrentItemIndex();
@@ -1071,16 +1071,20 @@ public class AudioController_Editor : EditorEx
                         {
                             int firstIndex = itemCount;
                             currentItemIndex = firstIndex;
+                            int addNum = 0;
                             foreach (AudioClip audioClip in audioClips)
                             {
+                                if (curCat.IsContainsClip(audioClip)) continue;
+
                                 ArrayHelper.AddArrayElement(ref curCat.AudioItems);
                                 AudioItem audioItem = curCat.AudioItems[currentItemIndex];
                                 audioItem.Name = audioClip.name;
                                 ArrayHelper.AddArrayElement(ref audioItem.subItems).Clip = audioClip;
                                 currentItemIndex++;
+                                addNum++;
                             }
 
-                            currentItemIndex = firstIndex;
+                            currentItemIndex = addNum > 0 ? firstIndex : firstIndex - 1;
                             KeepChanges();
                         }
                     }
@@ -1206,13 +1210,13 @@ public class AudioController_Editor : EditorEx
                                 ? "如果禁用，即使加载了不同的场景，该音频项目也将继续播放。但是这个的优先级低于音频预制上PoolableObject脚本的DoNotDestroyOnLoad属性"
                                 : "If disabled, this audio item will continue playing even if a different scene is loaded.");
 
-                        if ((int) curItem.Loop == 3) // deprecated gapless looping
+                        if ((int)curItem.Loop == 3) // deprecated gapless looping
                         {
                             curItem.Loop = AudioItem.LoopMode.LoopSequence;
                             KeepChanges();
                         }
 
-                        curItem.Loop = (AudioItem.LoopMode) EnumPopup(AC.IsUseChinese ? "循环播放模式" : "Loop Mode", curItem.Loop,
+                        curItem.Loop = (AudioItem.LoopMode)EnumPopup(AC.IsUseChinese ? "循环播放模式" : "Loop Mode", curItem.Loop,
                             AC.IsUseChinese
                                 ? "循环模式确定音频子项的循环方式\n" +
                                   "- DoNotLoop\n   不循环\n\n" +
@@ -1268,7 +1272,7 @@ public class AudioController_Editor : EditorEx
                             curItem.SubItemPickMode = AudioPickSubItemMode.StartLoopSequenceWithFirst;
                         }
 
-                        curItem.SubItemPickMode = (AudioPickSubItemMode) EnumPopup(AC.IsUseChinese ? "抽取子音效的模式" : "Pick Subitem Mode", curItem.SubItemPickMode,
+                        curItem.SubItemPickMode = (AudioPickSubItemMode)EnumPopup(AC.IsUseChinese ? "抽取子音效的模式" : "Pick Subitem Mode", curItem.SubItemPickMode,
                             AC.IsUseChinese
                                 ? "确定播放音频项目时选择哪个子音效。\n" +
                                   "- Disabled\n   禁用音频，不会抽取任何音频\n\n" +
@@ -1341,13 +1345,18 @@ public class AudioController_Editor : EditorEx
                                 {
                                     int firstIndex = subItemCount;
                                     currentSubitemIndex = firstIndex;
+                                    int addNum = 0;
                                     foreach (AudioClip audioClip in audioClips)
                                     {
+                                        if (curItem.IsContainsClip(audioClip))
+                                            continue;
+
                                         ArrayHelper.AddArrayElement(ref curItem.subItems).Clip = audioClip;
                                         currentSubitemIndex++;
+                                        addNum++;
                                     }
 
-                                    currentSubitemIndex = firstIndex;
+                                    currentSubitemIndex = addNum > 0 ? firstIndex : firstIndex - 1;
                                     KeepChanges();
                                 }
                             }
@@ -1627,7 +1636,7 @@ public class AudioController_Editor : EditorEx
     {
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label(label, styleLabel);
-        clip = (AudioClip) EditorGUILayout.ObjectField(clip, typeof(AudioClip), false);
+        clip = (AudioClip)EditorGUILayout.ObjectField(clip, typeof(AudioClip), false);
         if (clip)
         {
             EditorGUILayout.Space();
@@ -1957,7 +1966,7 @@ public class AudioController_Editor : EditorEx
 
         for (int i = 0; i < objList.Length; i++)
         {
-            clipList[i] = (AudioClip) objList[i];
+            clipList[i] = (AudioClip)objList[i];
         }
 
         return clipList;

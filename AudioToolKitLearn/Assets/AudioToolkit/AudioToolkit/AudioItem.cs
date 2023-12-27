@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -204,6 +205,16 @@ public class AudioCategory
         {
             AudioItems[i].UnloadAudioClip();
         }
+    }
+
+    public bool IsContainsClip(AudioClip audioClip)
+    {
+        foreach (var item in AudioItems)
+        {
+            if (item.Name.Equals(audioClip.name)) return true;
+        }
+
+        return false;
     }
 }
 
@@ -471,6 +482,16 @@ public class AudioItem
                 Resources.UnloadAsset(si.Clip);
             }
         }
+    }
+
+    public bool IsContainsClip(AudioClip audioClip)
+    {
+        foreach (var item in subItems)
+        {
+            if(item.Clip.GetInstanceID() == audioClip.GetInstanceID()) return true;
+        }
+
+        return false;
     }
 }
 
