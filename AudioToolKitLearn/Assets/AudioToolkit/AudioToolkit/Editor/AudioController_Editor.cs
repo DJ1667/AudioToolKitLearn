@@ -1056,6 +1056,11 @@ public class AudioController_Editor : EditorEx
                     KeepChanges();
                 }*/
 
+                //if (GUILayout.Button(AC.IsUseChinese ? "清除所有Item" : "Clear All Audio Item"))
+                //{
+                //    curCat.AudioItems = null;
+                //}
+
 
                 VerticalSpace();
 
