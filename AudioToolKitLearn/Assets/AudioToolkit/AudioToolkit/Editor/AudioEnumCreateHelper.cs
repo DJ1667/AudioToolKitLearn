@@ -55,6 +55,23 @@ public class AudioEnumCreateHelper : MonoBehaviour
                         classSource.AppendLine($"\t//{item.Name},\t\t//{item.TipsInfo}    注意!!! ==> 该音频重复添加，请修改");
                     else
                     {
+                        //检查对应的音频文件是否为空
+                        bool isSoundEmpty = false;
+                        if (item.subItems.Length <= 0) isSoundEmpty = true;
+                        foreach (var it in item.subItems)
+                        {
+                            if(it.Clip == null)
+                            {
+                                isSoundEmpty = true;
+                                break;
+                            }
+                        }
+                        if (isSoundEmpty)
+                        {
+                            Debug.LogError($"{tempPath}->{category.Name}->{item.Name}: 对应的音频文件为空");
+                            continue;
+                        }
+
                         classSource.AppendLine($"\t{item.Name},\t\t//{item.TipsInfo}");
                         _tempDict.Add(item.Name, 1);
                     }
